@@ -9,14 +9,26 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.example.basicpj.service.PostService;
 
+import java.util.List;
+
 @Controller
 @RequiredArgsConstructor
 public class PostController {
     private final PostService postService;
 
     @GetMapping("/board")
-    public String boardPage(Model model) {
-        model.addAttribute("posts", postService.getPosts());
+    public String boardPage(Model model,
+                            @RequestParam(defaultValue = "1") int page,
+                            @RequestParam(defaultValue = "10") int size) {
+        List<Post> posts = postService.getPostsByPage(page, size);
+        int totalCount = postService.getPostCount();
+
+        int totalPages = (int) Math.ceil((double) totalCount / size);
+
+        model.addAttribute("posts", posts);
+        model.addAttribute("currentPage", page);
+        model.addAttribute("totalPages", totalPages);
+
         return "board";
     }
 

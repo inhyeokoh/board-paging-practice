@@ -11,11 +11,21 @@
     </insert>
 
     <!-- 전체 조회-->
-    <select id="getAllPosts" resultType="org.example.basicpj.domain.Post">
-        SELECT title,
+    <select id="getPostsByPage" resultType="org.example.basicpj.domain.Post">
+        SELECT id,
+                title,
                 writer,
                 content,
                 created_at AS createdAt
+        FROM post
+        ORDER BY id DESC
+        LIMIT #{size} OFFSET #{offset}
+
+    </select>
+
+    <!-- 전체 게시물 수 조회용 -->
+    <select id="getPostCount" resultType="int">
+        SELECT COUNT(*)
         FROM post
     </select>
 

@@ -17,7 +17,12 @@ public class PostService {
         postRepository.save(post);
     }
 
-    public List<Post> getPosts(){
-        return postRepository.getAllPosts();
+    public List<Post> getPostsByPage(int page, int size) {
+        int offset = (page - 1) * size;
+        return postRepository.getPostsByPage(size, offset);
+    }
+
+    public int getPostCount() {
+        return postRepository.getPostCount();
     }
 }

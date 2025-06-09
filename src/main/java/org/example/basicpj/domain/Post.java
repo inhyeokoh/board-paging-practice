@@ -10,9 +10,9 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @Builder
 public class Post {
-    Long id;
-    String title;
-    String content;
-    String writer;
-    LocalDateTime createdAt;
+    private Long id;
+    private String title;
+    private String content;
+    private String writer;
+    private LocalDateTime createdAt;
 }

@@ -10,4 +10,8 @@ public interface PostRepository {
     void save(Post post);
 
     List<Post> getAllPosts();
+
+    List<Post> getPostsByPage(int size, int offset);
+
+    int getPostCount();
 }
